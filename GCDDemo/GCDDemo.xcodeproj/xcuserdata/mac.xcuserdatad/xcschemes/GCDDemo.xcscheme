@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "049F37401C89EE5D00F86694"
+               BlueprintIdentifier = "045B224D1C8B17C400ECB8C0"
                BuildableName = "GCDDemo.app"
                BlueprintName = "GCDDemo"
                ReferencedContainer = "container:GCDDemo.xcodeproj">
@@ -32,7 +32,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "049F37401C89EE5D00F86694"
+            BlueprintIdentifier = "045B224D1C8B17C400ECB8C0"
             BuildableName = "GCDDemo.app"
             BlueprintName = "GCDDemo"
             ReferencedContainer = "container:GCDDemo.xcodeproj">
@@ -55,7 +55,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "049F37401C89EE5D00F86694"
+            BlueprintIdentifier = "045B224D1C8B17C400ECB8C0"
             BuildableName = "GCDDemo.app"
             BlueprintName = "GCDDemo"
             ReferencedContainer = "container:GCDDemo.xcodeproj">
@@ -74,7 +74,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "049F37401C89EE5D00F86694"
+            BlueprintIdentifier = "045B224D1C8B17C400ECB8C0"
             BuildableName = "GCDDemo.app"
             BlueprintName = "GCDDemo"
             ReferencedContainer = "container:GCDDemo.xcodeproj">
