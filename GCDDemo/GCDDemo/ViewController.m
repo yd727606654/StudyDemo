@@ -21,7 +21,8 @@
 //    [self creatDispatchQueue];
 //    [self dispatchGroup];
 //    [self dispatchBarrierAsync];
-    [self dispatchSync];
+//    [self dispatchSync];
+    [self dispatchSuspend];
 }
 - (void)creatDispatchQueue{
     //Serial Dispatch Queue的使用场景一般是在处理数据竞争类似的问题
@@ -73,7 +74,8 @@
     // 工作中我们大多数情况下不用自己创建Dispatch Queue，我们可以方便的获取系统标准提供的Dispatch Queue那就是下面的两个
    dispatch_queue_t main = dispatch_get_main_queue();// 如其名指的就是主线程（更新UI必须在此线程）所以也肯定是 Serial Dispatch Queue 它的处理在主线程的RunLoop中执行
     
-    /*dispatch_get_global_queue是 concurrent Dispatch Queue
+    /*
+     dispatch_get_global_queue是 concurrent Dispatch Queue
      第一个参数有四个优先级
      
      #define DISPATCH_QUEUE_PRIORITY_HIGH 2
@@ -190,7 +192,7 @@
 }
 
 - (void)dispatchSync{
-    // 如其名，就是同步，就是等待当程处理结束时才执行
+    // 如其名，就是同步，就是等待当现程处理结束时才执行
     // 我们在主线程需要更新UI，但是在数据没有处理完时不能更新，处理完时要立即更新，所以可以使用此种写法
     NSLog(@"开始");
 
@@ -209,10 +211,41 @@
     
 }
 
+- (void)dispatchSuspend{
+    dispatch_queue_t queue = dispatch_queue_create("dispatchSuspend", NULL);
+// 挂起指定的 Queue
+    dispatch_suspend(queue);
+// 恢复指定的 Queue
+    dispatch_resume(queue);
+}
+
+- (void)dispatchSemaphore{
+    // 创建semaphore 参数标示计数初始值
+    dispatch_semaphore_t semaphore = dispatch_semaphore_create(1);
+    // 等待semaphore 当参数计数为0时等待，为1或者大于1时，则减去1而不等待
+    dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
+    /*
+     第二个参数也可以设置成为一段时间，当返回值是0的时候，说明在指定时间内数值达到大于等于1或者semaphore达到大于等于1
+     */
+ long result = dispatch_semaphore_wait(semaphore, dispatch_time(DISPATCH_TIME_NOW, 1ull * NSEC_PER_SEC));
+    if (result == 0) {
+        // codeing
+    }else{
+        // 时间到，semaphore数值还是0
+    }
+    
+    //semaphore 数值加1
+    dispatch_semaphore_signal(semaphore);
+}
 
 
-
-
+- (void)dispatchOnce{
+    // 线程安全的只执行一次指定处理，最主要的作用就是创建单例，怎么创建应该做过iOS开发的都知道
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+       // code to be executed once
+    });
+}
 
 
 
